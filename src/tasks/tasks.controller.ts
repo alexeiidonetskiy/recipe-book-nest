@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
@@ -16,16 +18,22 @@ export class TasksController {
 
   @Get()
   async getTasks(): Promise<Task[]> {
-    return await this.tasksService.findAll();
+    return await this.tasksService.getAllTasks();
   }
 
   @Get('/:id')
-  getTaskById(@Param('id', ParseIntPipe) id: number): Promise<Task> {
-    return this.tasksService.getTaskById(id);
+  async getTaskById(@Param('id', ParseIntPipe) id: number): Promise<Task> {
+    return await this.tasksService.getTaskById(id);
   }
 
   @Post()
   async createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
     return await this.tasksService.createTask(createTaskDto);
   }
+
+  @Delete()
+  async deleteTask() {}
+
+  @Patch()
+  async updateTask() {}
 }

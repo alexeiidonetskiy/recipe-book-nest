@@ -18,14 +18,12 @@ export class TasksService {
 
   private logger = new Logger('TaskRepository');
 
-  async findAll(): Promise<Task[]> {
+  async getAllTasks(): Promise<Task[]> {
     return await this.taskRepository.find();
   }
 
   async getTaskById(id: number): Promise<Task> {
-    const found = await this.taskRepository.findOne({
-      where: { id },
-    });
+    const found = await this.taskRepository.findOneBy({ id });
 
     if (!found) {
       throw new NotFoundException(`Task with ID ${id} non found`);
