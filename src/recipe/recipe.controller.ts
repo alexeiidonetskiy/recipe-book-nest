@@ -1,6 +1,9 @@
 import {
   Body,
   Controller,
+  Get,
+  Param,
+  ParseIntPipe,
   Post,
   UseGuards,
   UsePipes,
@@ -17,9 +20,19 @@ import { AuthGuard } from '@nestjs/passport';
 export class RecipeController {
   constructor(private recipeService: RecipeService) {}
 
+  @Get()
+  getAllRecipes() {
+    return this.recipeService.getAll();
+  }
+
+  @Get('/:id')
+  getById(@Param('id', ParseIntPipe) id: number) {
+    return this.recipeService.getById(id);
+  }
+
   @Post()
   @UsePipes(ValidationPipe)
-  async createRecipe(
+  createRecipe(
     @Body() createRecipeDto: CreateRecipeDto,
     @GetUser() user: User,
   ) {

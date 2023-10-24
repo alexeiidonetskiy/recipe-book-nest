@@ -17,6 +17,14 @@ export class RecipeService {
 
   private logger = new Logger('RecipeService');
 
+  async getAll() {
+    return await this.recipeRepository.find();
+  }
+
+  async getById(id) {
+    return await this.recipeRepository.findOneBy({ id });
+  }
+
   async createRecipe(createRecipeDto: CreateRecipeDto, user) {
     const { title, description } = createRecipeDto;
 
@@ -27,7 +35,8 @@ export class RecipeService {
 
     try {
       await this.recipeRepository.save(recipe);
-      this.logger.verbose(`User "${user.username}" creating new recipe. Data: ${JSON.stringify(createRecipeDto)}`);
+      this.logger.verbose(`User "${user.username}" creating new recipe. Data: ${JSON.stringify(createRecipeDto)}`,
+      );
     } catch (e) {
       throw new InternalServerErrorException(e);
     }
