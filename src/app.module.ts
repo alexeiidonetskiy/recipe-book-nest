@@ -4,6 +4,8 @@ import 'dotenv/config';
 import { DataSource } from 'typeorm';
 import { Task } from './tasks/task.entity';
 import { TasksModule } from './tasks/tasks.module';
+import { AuthModule } from './auth/auth.module';
+import { User } from './auth/user.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -13,10 +15,11 @@ import { TasksModule } from './tasks/tasks.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [Task],
+      entities: [Task, User],
       synchronize: true, //Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
     }),
     TasksModule,
+    AuthModule,
   ],
 })
 export class AppModule {
