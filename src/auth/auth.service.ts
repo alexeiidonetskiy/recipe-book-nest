@@ -21,9 +21,9 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  private logger = new Logger('TaskRepository');
+  private logger = new Logger('AuthService');
 
-  async signUp(authCredentialsDto: AuthCredentialsDto): Promise<User> {
+  async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
     const { username, password } = authCredentialsDto;
 
     const user = new User();
@@ -40,8 +40,6 @@ export class AuthService {
         throw new InternalServerErrorException(e);
       }
     }
-
-    return user;
   }
 
   async signIn(

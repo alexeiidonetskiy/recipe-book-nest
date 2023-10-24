@@ -17,7 +17,7 @@ export class AuthController {
   @Post('/signup')
   signUp(
     @Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto,
-  ): Promise<User> {
+  ): Promise<void> {
     return this.authService.signUp(authCredentialsDto);
   }
 }

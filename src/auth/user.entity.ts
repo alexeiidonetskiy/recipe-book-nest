@@ -1,7 +1,9 @@
+import { Recipe } from 'src/recipe/recipe.entity';
 import {
   BaseEntity,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
@@ -21,6 +23,9 @@ export class User extends BaseEntity {
 
   @Column()
   salt: string;
+
+  @OneToMany(() => Recipe, (recipe) => recipe.user, { eager: true })
+  recipes: Recipe[];
 
   async validatePassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.salt);
