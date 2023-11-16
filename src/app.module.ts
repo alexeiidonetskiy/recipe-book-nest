@@ -2,12 +2,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import 'dotenv/config';
 import { DataSource } from 'typeorm';
-import { Task } from './tasks/task.entity';
-import { TasksModule } from './tasks/tasks.module';
 import { AuthModule } from './auth/auth.module';
-import { User } from './auth/user.entity';
+import { User } from './auth/entities/user.entity';
 import { RecipeModule } from './recipe/recipe.module';
-import { Recipe } from './recipe/recipe.entity';
+import { Recipe } from './recipe/entities/recipe.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -17,11 +15,10 @@ import { Recipe } from './recipe/recipe.entity';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [Task, User, Recipe],
+      entities: [User, Recipe],
       //Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
       synchronize: true,
     }),
-    TasksModule,
     RecipeModule,
     AuthModule,
   ],
