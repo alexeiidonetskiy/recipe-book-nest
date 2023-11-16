@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { User } from './auth/entities/user.entity';
 import { RecipeModule } from './recipe/recipe.module';
 import { Recipe } from './recipe/entities/recipe.entity';
+import { AppController } from './app.controller';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -22,6 +23,7 @@ import { Recipe } from './recipe/entities/recipe.entity';
     RecipeModule,
     AuthModule,
   ],
+  controllers: [AppController],
 })
 export class AppModule {
   constructor(private dataSource: DataSource) {}
