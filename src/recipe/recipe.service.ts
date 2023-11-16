@@ -8,8 +8,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Recipe } from './entities/recipe.entity';
 import { CreateRecipeDto } from './dto/create-recipe';
-import { generateImageName } from 'src/recipe/utils/util';
-import { uploadImageToS3 } from 'src/recipe/utils/s3-bucket-uploader';
+import { generateImageName } from '../recipe/utils/util';
+import { uploadImageToS3 } from '../recipe/utils/s3-bucket-uploader';
 
 @Injectable()
 export class RecipeService {

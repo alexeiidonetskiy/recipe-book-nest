@@ -1,4 +1,4 @@
-import { Recipe } from 'src/recipe/entities/recipe.entity';
+import { Recipe } from '../../recipe/entities/recipe.entity';
 import {
   BaseEntity,
   Column,
